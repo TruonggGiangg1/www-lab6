@@ -1,0 +1,26 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- MySQL Database bean -->
+    <bean id="mysqlDatabase" class="com.example.lab6.database.impl.MySQLDatabase" />
+
+    <!-- MongoDB Database bean -->
+    <bean id="mongoDatabase" class="com.example.lab6.database.impl.MongoDBDatabase" />
+
+    <!-- CustomerBusiness dùng MySQL (constructor injection) -->
+    <bean id="customerBusinessConstructorMySQL" class="com.example.lab6.dao.CustomerBusiness">
+        <constructor-arg ref="mysqlDatabase"/>
+    </bean>
+
+    <bean id="customerBusinessSetter" class="com.example.lab6.dao.CustomerBusiness">
+        <property name="database" ref="mongoDatabase"/>
+    </bean>
+
+    <!-- CustomerBusiness dùng MongoDB (constructor injection) -->
+    <bean id="customerBusinessConstructorMongoDB" class="com.example.lab6.dao.CustomerBusiness">
+        <constructor-arg ref="mongoDatabase"/>
+    </bean>
+
+</beans>
